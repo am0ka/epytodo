@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EPyTodo Organizer | {{ page_title }}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/epytodo.css')|autoversion }}">
+</head>
+<body class="desktop">
+    <nav class="nav grid">
+        <h1>EPyTodo Organizer</h1>
+        <ul>
+            {% if not session.username %}
+            <li><a href="#login_modal">Log in</a></li>
+            <li><a href="#register_modal">Sign up</a></li>
+            {% else %}
+            <li><a href="{{ url_for('dashboard_route')}}" class="button">Dashboard</a></li>
+            <li><a href="#" onclick="logout_button();return false;">Log out</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <section class="grid" id="header">
+        <div class="header-text">
+            <h2>Simple To-Do List<br />Made on Python</h2>
+            <p class="leading">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ac.</p>
+            {% if not session.username %}
+            <a href="#login_modal" class="button">Log in</a>
+            <a href="#register_modal" class="button">Sign up</a>
+            {% else %}
+            <a href="{{ url_for('dashboard_route')}}" class="button">Dashboard</a>
+            <a href="#" class="button" onclick="logout_button();return false;">Log out</a>
+            {% endif %}
+        </div>
+        <div class="header-img">
+            <img src="{{ url_for('static', filename='img/tablet.png') }}" alt="todo notebook">
+        </div>
+        <section id="authors">
+                <h3>We are, who did this project</h3>
+                <div class="people grid">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='img/amir.jpg') }}" alt="">
+                        <h4>Amir Sarsenov</h4>
+                    </a>
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='img/mayeul.jpg') }}" alt="">
+                        <h4>Mayeul Kergall</h4>
+                    </a>
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='img/germain.jpg') }}" alt="">
+                        <h4>Germain Durand</h4>
+                    </a>
+                </div>
+            </section>
+    </section>
+    <section id="authors">
+        <h3>We are, who did this project</h3>
+        <div class="people grid">
+            <a href="#">
+                <img src="{{ url_for('static', filename='img/amir.jpg') }}" alt="">
+                <h4>Amir Sarsenov</h4>
+            </a>
+            <a href="#">
+                <img src="{{ url_for('static', filename='img/mayeul.jpg') }}" alt="">
+                <h4>Mayeul Kergall</h4>
+            </a>
+            <a href="#">
+                <img src="{{ url_for('static', filename='img/germain.jpg') }}" alt="">
+                <h4>Germain Durand</h4>
+            </a>
+        </div>
+    </section>
+    {% include "footer.html" %}
+    <!-- MODALS -->
+    {% include "modals/login.html" %}
+    {% include "modals/register.html" %}
+</body>
+</html>

@@ -1,0 +1,12 @@
+<div class="modal-window" id="login_modal">
+    <div>
+        <a href="#" class="modal-close">Close &times;</a>
+        <h1>Login please</h1>
+        <hr />
+        <form action="{{ url_for('login_route') }}" method="post">
+            <input type="text" name="username" placeholder="Your username" required autofocus autocomplete="off">
+            <input type="password" name="password" placeholder="Your password" required autocomplete="off">
+            <button class="button" type="submit">Log in</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="modal-window" id="new_task_modal">
+    <div>
+        <a href="#" class="modal-close">Close &times;</a>
+        <h1>New task</h1>
+        <hr />
+        <form action="{{ url_for('add_task_route') }}" method="post">
+            <input type="text" name="title" placeholder="Title" required autofocus autocomplete="off">
+            <label>Deadline:
+                <input type="datetime-local" step="1" name="end" autocomplete="off">
+            </label>
+            <label>Status: 
+                <select name="status">
+                    <option value="not started">Not started</option>
+                    <option value="in progress">In progress</option>
+                    <option value="done">Done</option>
+                </select>
+            </label>
+            <button class="button" type="submit">Create</button>
+            <button type="reset" class="button">Clear</button>
+        </form>
+    </div>
+</div>

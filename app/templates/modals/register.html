@@ -1,0 +1,12 @@
+<div class="modal-window" id="register_modal">
+    <div>
+        <a href="#" class="modal-close">Close &times;</a>
+        <h1>Registration</h1>
+        <hr />
+        <form action="{{ url_for('registration_route') }}" method="post">
+            <input type="text" name="username" placeholder="Your username" required autofocus autocomplete="off">
+            <input type="password" name="password" placeholder="Your password" required autocomplete="off">
+            <button class="button" type="submit">Sign up</button>
+        </form>
+    </div>
+</div>

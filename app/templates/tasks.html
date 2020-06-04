@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/epytodo.css')|autoversion }}">
+
+<section id="tasks">
+    <div class="tasks-header grid">
+        <span class="status">Status<img src="{{ url_for('static', filename='img/status.svg') }}" height="18px" alt=""></span>
+        <span class="title">Title</span>
+        <span class="deadline">Deadline</span>
+        <a href="#new_task_modal" class="button button-task button-add"><span>Add</span></a>
+    </div>
+    {% for task in tlist %}
+    <div class="task-entry grid">
+        {% if task[4] == "not started" %}
+        <span class="status undone">Undone<img src="{{ url_for('static', filename='img/undone.svg') }}" height="18px" alt=""></span>
+        {% elif task[4] == "in progress" %}
+        <span class="status inprog">In progress<img src="{{ url_for('static', filename='img/inprog.svg') }}" height="18px" alt=""></span>
+        {% else %}
+        <span class="status done">Done<img src="{{ url_for('static', filename='img/done.svg') }}" height="18px" alt=""></span>
+        {% endif %}
+        <span class="task-title">{{ task[1] }}</span>
+        {% if task[3] %}
+        {% set date = task[3].split(' ')[0].split('-') %}
+        {% set time = task[3].split(' ')[1].split(':') %}
+        <span class="task-deadline">
+            {{ date[2] }} / {{ date[1] }} / {{ date[0] }}
+            <span class="desktop">&nbsp;&commat;&nbsp;{{ time[0] }} : {{ time[1] }} : {{ time[2] }}</span>
+        </span>
+        {% endif %}
+        <div class="actions">
+            <a href="/user/task/{{ task[0] }}" class="button button-task button-edit" type="button"><span>Edit</span></a>
+            <a href="#" class="button button-task button-delete" onclick="deleteTask({{ task[0] }});"><span>Delete</span></a>
+            <form id="form-delete-id-{{ task[0] }}" action="{{ url_for('delete_task_route', tid=task[0]) }}" method="post" style="display:none"></form>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- <div class="tasks-footer grid">
+        <input type="checkbox" onclick="select_all_tasks(this);">
+        <a class="button button-task button-delete"><span>Delete</span></a>
+    </div> -->
+</section>
+<script>
+    function deleteTask(tid) {
+        event.preventDefault();
+        document.getElementById("form-delete-id-" + tid).submit();
+        return false;
+    }
+</script>
+<script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+{% include "modals/new_task.html" %}

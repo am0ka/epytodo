@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EPyTodo Organizer | {{ page_title }}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/epytodo.css')|autoversion }}">
+    <script>
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+            obj.style.border = 0;
+        }
+    </script>
+</head>
+<body>
+    <nav class="nav dash-nav grid">
+        <h1>EPyTodo Organizer</h1>
+        <ul>
+            {% if not session.username %}
+            <li><a href="#login_modal">Log in</a></li>
+            <li><a href="#register_modal">Sign up</a></li>
+            {% else %}
+            <li><a href="#" onclick="logout_button();return false;" class="button">Log out</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <section class="grid" id="header">
+        <div class="header-text">
+            <h2>Dashboard</h2>
+            <p class="leading">Hello, <span class="username">{{ session['username'] }}</span>!</p>
+        </div>
+    </section>
+    <section class="grid" id="summary">
+        <span>Total: {{ tcount }}</span>
+        <span>Undone: {{ undone }}</span>
+        <span>In progress: {{ inprog }}</span>
+        <span>Done: {{ done }}</span>
+    </section>
+    <iframe src="{{ url_for('all_tasks_route') }}" scrolling="no"  onload="resizeIframe(this);"></iframe>
+    {% include "footer.html" %}
+    <!-- MODALS -->
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+</body>
+</html>

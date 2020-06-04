@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/epytodo.css')|autoversion }}">
+<div class="show modal-window update-window" id="edit_task_modal">
+    <div>
+        <h1>Update task</h1>
+        <hr />
+        <form action="{{ url_for('update_task_route', tid=task[0]) }}" method="post">
+            <label>Title: 
+                <input type="text" name="title" placeholder="Title" value="{{ task[1] }}" required autofocus autocomplete="off">
+            </label>
+            <label>Deadline:
+                {% if task[3] %}
+                <input type="datetime-local" step="1" name="end" autocomplete="off" value="{{ task[3]|datetime }}">
+                {% else %}
+                <input type="datetime-local" step="1" name="end" autocomplete="off">
+                {% endif %}
+            </label>
+            <label>Status: 
+                <select name="status">
+                    <option value="not started" {% if task[4] == "not started" %} selected {% endif %}>Not started</option>
+                    <option value="in progress" {% if task[4] == "in progress" %} selected {% endif %}>In progress</option>
+                    <option value="done" {% if task[4] == "done" %} selected {% endif %}>Done</option>
+                </select>
+            </label>
+            <div class="actions">
+                <button class="button" type="submit">Update</button>
+                <a href="{{ url_for('all_tasks_route') }}" class="button button-big">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
