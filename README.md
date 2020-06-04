@@ -6,6 +6,7 @@ Frontend is mobile-first pure CSS. It has no creativity, as I didn't have any gu
 # Prerequisites
 
 ```sh
+$ cat epytodo.sql | sudo mysql -u root -p
 $ virtualenv . -p /usr/bin/python3
 $ source ./bin/activate
 $ ./run.py
